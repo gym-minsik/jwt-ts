@@ -8,7 +8,7 @@ Status: **Work In Progress**
 -	**Lightweight:** Built without any third-party libraries, ensuring minimal dependencies.
 
 ## Getting Started
-### Creating an Access Token
+### Creating a token
 ```ts
 import { SecretKey, sign } from '../index';
 
@@ -30,4 +30,41 @@ console.log(result);
   payload: { sub: 'user-id', exp: 1732023533, iat: 1732023203 }
 }
 ```
+
+## Type Safety
+### Key
+```ts
+const { privateKey, publicKey } = generateRsaKeyPair({ modulusLength: 3072 });
+
+const { token } = sign({
+  algorithm: 'HS256',
+  key: privateKey, // ❌ Compile-time error: A PrivateKey is not valid for the HS256 algorithm.
+});
+```
+
+### Registered Claims
+```ts
+const { token } = sign({
+  algorithm: 'HS256',
+  key: new SecretKey('very-secure'),
+  customClaims: { // ❌ Compile-time error: exp is a registered claim.
+    exp: 123456789,
+  },
+});
+```
+
+### Expires In
+```ts
+const { token } = sign({
+  algorithm: 'HS256',
+  key: new SecretKey('very-secure'),
+  subject: 'user-id',
+  expiresIn: { // Human-readable configuration for token expiration.
+    minutes: 5,
+    seconds: 30,
+  },
+});
+```
+
+
 
