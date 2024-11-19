@@ -30,7 +30,7 @@ console.log(result);
 **Example Output:**
 ```ts
 {
-  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiJ1c2VyLWlkIiwiZXhwIjoxNzMxMjQ1MjM1LCJpYXQiOjE3MzEyNDQ5MzV9c_9lKMVeCHlBfm2jSKqTrEWe5pL_vQFwORuR_kmONrs",
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLWlkIiwiZXhwIjoxNzMyMDIwNjIzLCJpYXQiOjE3MzIwMjAzMjN9.RglsrtG6JwK0f1MdltbpUBxZ_esG9EUlThblJboi9x0',
   header: {
     alg: "HS256",
     typ: "JWT"
