@@ -10,36 +10,24 @@ Status: **Work In Progress**
 ## Getting Started
 ### Creating an Access Token
 ```ts
-import { Duration, SecretKey, sign } from 'jwt-ts';
-
-const userId = 'user-id';
-const secretKey = new SecretKey('very-secure');
+import { SecretKey, sign } from '../index';
 
 const result = sign({
-  subject: userId,
-  expiresIn: new Duration({
-    minutes: 5,
-  }),
+  subject: 'user-id',
+  expiresIn: { minutes: 5, seconds: 30 },
   algorithm: 'HS256',
-  key: secretKey,
+  key: new SecretKey('very-secure'),
 });
 
 console.log(result);
 ```
 
 **Example Output:**
-```ts
+```bash
 {
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLWlkIiwiZXhwIjoxNzMyMDIwNjIzLCJpYXQiOjE3MzIwMjAzMjN9.RglsrtG6JwK0f1MdltbpUBxZ_esG9EUlThblJboi9x0',
-  header: {
-    alg: "HS256",
-    typ: "JWT"
-  },
-  payload: {
-    sub: "user-id",
-    exp: 1731245235,
-    iat: 1731244935
-  }
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLWlkIiwiZXhwIjoxNzMyMDIzNTMzLCJpYXQiOjE3MzIwMjMyMDN9.XiU2BJRpY8Iyzzf-1sT14amwr0tKAqD5cm-ESNuP_lw',
+  header: { alg: 'HS256', typ: 'JWT' },
+  payload: { sub: 'user-id', exp: 1732023533, iat: 1732023203 }
 }
 ```
 
