@@ -59,7 +59,10 @@ const { token } = sign({
   algorithm: 'HS256',
   key: new SecretKey('very-secure'),
   subject: 'user-id',
-  expiresIn: { // Human-readable configuration for token expiration.
+  expiresIn: { 
+    // Human-readable configuration for token expiration
+    // ✅ More type-safe than Vercel's string-based configuration
+    // Vercel example: expiresIn: '5m 30s' (string-based, prone to runtime errors)  
     minutes: 5,
     seconds: 30,
   },
