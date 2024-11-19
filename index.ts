@@ -1,3 +1,5 @@
+export { generateRsaKeyPair } from './src/cryptographic/utils/generate-rsa-key-pair';
+
 export { NumericDate } from './src/global/models/numeric-date';
 export { Duration } from './src/global/models/duration';
 export { PrivateKey } from './src/cryptographic/models/private-key';
