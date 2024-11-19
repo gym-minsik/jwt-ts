@@ -105,7 +105,7 @@ describe('verify', () => {
   });
 
   it('should throw an error for expired token.', () => {
-    const fiveMinutes = new Duration({ minutes: 5 });
+    const fiveMinutes = { minutes: 5 };
     const fiveMinutesOneSeocnds = new Duration({ minutes: 5, seconds: 1 });
     const { token } = sign({
       algorithm: 'RS256',

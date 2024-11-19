@@ -52,8 +52,8 @@ export function sign<C, A extends SupportedSignatureAlgorithm>(
     key: A extends SupportedHmacAlgorithm ? SecretKey : PrivateKey;
     subject?: Subject;
     audience?: Subject;
-    expiresIn?: Duration;
-    activeAfter?: Duration;
+    expiresIn?: DurationConstructorArgs;
+    activeAfter?: DurationConstructorArgs;
     jwtId?: JwtId;
   }>
 ) {
@@ -78,8 +78,8 @@ export function sign<C, A extends SupportedSignatureAlgorithm>(
     : RegisteredClaims & C = {
     ...completeSubject(subject),
     ...completeAudience(audience),
-    ...completeExpirationDate(expiresIn),
-    ...completeNotBefore(activeAfter),
+    ...completeExpirationDate(expiresIn ? new Duration(expiresIn) : undefined),
+    ...completeNotBefore(activeAfter ? new Duration(activeAfter) : undefined),
     ...completeIssuedAt(),
     ...completeJwtId(jwtId),
     ...completeCustomClaims(customClaims),
@@ -113,6 +113,12 @@ export function sign<C, A extends SupportedSignatureAlgorithm>(
     payload,
   };
 }
+
+type DurationConstructorArgs = {
+  readonly seconds?: number;
+  readonly minutes?: number;
+  readonly hours?: number;
+};
 
 function completeCustomClaims<C>(
   customClaims: ValidCustomClaims<C> | undefined

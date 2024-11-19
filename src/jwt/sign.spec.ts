@@ -38,7 +38,7 @@ describe('sign', () => {
             customClaims: {},
             key: fakeSecretKey,
             algorithm: 'HS256',
-            activeAfter: new Duration({ minutes: i }),
+            activeAfter: { minutes: i },
           })
         ).toThrow();
       }
@@ -51,7 +51,7 @@ describe('sign', () => {
             customClaims: {},
             key: fakeSecretKey,
             algorithm: 'HS256',
-            expiresIn: new Duration({ minutes: i }),
+            expiresIn: { minutes: i },
           })
         ).toThrow();
       }
@@ -66,8 +66,8 @@ describe('sign', () => {
       const customClaims = Object.freeze({
         type: 'ACCESS_TOKEN',
       });
-      const fiveMinutes = new Duration({ minutes: 5 });
-      const tenMinutes = new Duration({ minutes: 10 });
+      const fiveMinutes = { minutes: 5 };
+      const tenMinutes = { minutes: 10 };
       const subject: Subject = 'fake-user-id';
       const audience: Audience = 'ALL';
       const jwtId: JwtId = 'fake-jwt-id';
@@ -90,10 +90,10 @@ describe('sign', () => {
       });
       expect(result.payload).toStrictEqual({
         ...customClaims,
-        exp: now.add(fiveMinutes).secondsSinceEpoch,
+        exp: now.add(new Duration(fiveMinutes)).secondsSinceEpoch,
         sub: subject,
         aud: audience,
-        nbf: now.add(tenMinutes).secondsSinceEpoch,
+        nbf: now.add(new Duration(tenMinutes)).secondsSinceEpoch,
         jti: jwtId,
         iat: now.secondsSinceEpoch,
       });
@@ -107,8 +107,8 @@ describe('sign', () => {
       const customClaims = Object.freeze({
         type: 'ACCESS_TOKEN',
       });
-      const fiveMinutes = new Duration({ minutes: 5 });
-      const tenMinutes = new Duration({ minutes: 10 });
+      const fiveMinutes = { minutes: 5 };
+      const tenMinutes = { minutes: 10 };
       const subject: Subject = 'fake-user-id';
       const audience: Audience = 'ALL';
 
@@ -119,10 +119,10 @@ describe('sign', () => {
       };
       const expectedPayload = {
         ...customClaims,
-        exp: now.add(fiveMinutes).secondsSinceEpoch,
+        exp: now.add(new Duration(fiveMinutes)).secondsSinceEpoch,
         sub: subject,
         aud: audience,
-        nbf: now.add(tenMinutes).secondsSinceEpoch,
+        nbf: now.add(new Duration(tenMinutes)).secondsSinceEpoch,
         iat: now.secondsSinceEpoch,
       };
 
