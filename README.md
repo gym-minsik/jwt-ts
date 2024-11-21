@@ -1,7 +1,7 @@
 # JWT TS
 A TypeScript approach to JWT signing and verification.
 
-Status: **Work In Progress**
+Status: alpha
 
 ## Features
 -	**Type-Safe:** Enhanced type safety through TypeScript’s powerful type system, reducing errors and increasing reliability.
